@@ -29,6 +29,9 @@ import com.google.gson.Gson;
  * getByProject
  * /findmyglober/glober/getByProject/{project}
  * 
+ *  * getByGloberId
+ * /findmyglober/glober/getByGloberId/{globerId}
+ * 
  * @author Gerardo Solorzano
  *
  */
@@ -71,4 +74,17 @@ public class GloberService {
 		List<GloberVO> listGlobers = globerDao.getGloberByProject(project);		
 		return Response.status(Status.OK).entity(gson.toJson(listGlobers)).build();
 	}
+	
+	@Path("/getByGloberId/{globerId}")
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getByGloberId(@PathParam("globerId") String globerId) throws JSONException {
+
+		globerDao = new GloberDao();
+		Gson gson = new Gson();
+		
+		GloberVO glober = globerDao.getGloberByGloberID(globerId);		
+		return Response.status(Status.OK).entity(gson.toJson(glober)).build();
+	}
+		
 }

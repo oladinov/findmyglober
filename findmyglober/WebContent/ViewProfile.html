@@ -134,7 +134,7 @@ if(!$.isNumeric(globerID )) {
 	$.ajax({ 
 	    type: "GET",
 	    dataType: "json",
-	    url: "/findmyglober/glober/getById/" + globerID,
+	    url: "/findmyglober/glober/getByGloberId/" + globerID,
 	    success: function(data){
 	       
 	       $('#fname').text(data.firstName + ' ' + data.secondName);
@@ -142,6 +142,9 @@ if(!$.isNumeric(globerID )) {
 	       $('#phone').text(data.phoneNumber);
 	       $('#mail').text(data.mail);
 	       $('#project').text(data.projectName);
+	    }, 
+	    error: function() {
+	    	alert("Ocurrió un error al obtener los datos del glober");
 	    }
 	});
 }
