@@ -12,7 +12,8 @@ public class GloberDao {
 
 	public List<GloberVO> getGloberByName(String name) {
 		String sql = "SELECT GLO.GlbId, GLO.SourceId, GLO.FirstName, GLO.SecondNAme," + 
-				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName " +
+				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName, " +
+				   "GLO.PicPath, GLO.Quadrant " + 
 				   "FROM findglbr.catglobers GLO, findglbr.tblprj PRO, findglbr.tblprjlead LEAD " +
 				   "where LEAD.GlbId = GLO.GlbId " +
 				   "and PRO.ProjectId = LEAD.ProjectId " +				   		
@@ -36,6 +37,8 @@ public class GloberDao {
 				vo.setPhoneNumber(resultSet.getString("PhNmbr"));
 				vo.setMail(resultSet.getString("MailAdd"));
 				vo.setProjectName(resultSet.getString("PrjName"));
+				vo.setQuadrant(resultSet.getString("Quadrant"));
+				vo.setPicPath(resultSet.getString("PicPath"));
 
 				listGlobers.add(vo);
 				vo = null;
@@ -51,7 +54,8 @@ public class GloberDao {
 		ArrayList<GloberVO> listGlobers = new ArrayList<GloberVO>();
 
 		String sql = "SELECT GLO.GlbId, GLO.SourceId, GLO.FirstName, GLO.SecondNAme," + 
-				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName " +
+				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName, " + 
+				   "GLO.PicPath, GLO.Quadrant " +
 				   "FROM findglbr.catglobers GLO, findglbr.tblprj PRO, findglbr.tblprjlead LEAD " +
 				   "where LEAD.GlbId = GLO.GlbId " +
 				   "AND PRO.ProjectId = LEAD.ProjectId " +				   		
@@ -72,6 +76,8 @@ public class GloberDao {
 				vo.setPhoneNumber(resultSet.getString("PhNmbr"));
 				vo.setMail(resultSet.getString("MailAdd"));
 				vo.setProjectName(resultSet.getString("PrjName"));
+				vo.setQuadrant(resultSet.getString("Quadrant"));
+				vo.setPicPath(resultSet.getString("PicPath"));
 
 				listGlobers.add(vo);
 				vo = null;
@@ -85,7 +91,8 @@ public class GloberDao {
 	
 	public List<GloberVO> getGloberByProject(String project) {
 		String sql = "SELECT GLO.GlbId, GLO.SourceId, GLO.FirstName, GLO.SecondNAme," + 
-				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName " +
+				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName, " +
+				   "GLO.PicPath, GLO.Quadrant " +
 				   "FROM findglbr.catglobers GLO, findglbr.tblprj PRO, findglbr.tblprjlead LEAD " +
 				   "where LEAD.GlbId = GLO.GlbId " +
 				   "and PRO.ProjectId = LEAD.ProjectId " +
@@ -109,6 +116,8 @@ public class GloberDao {
 				vo.setPhoneNumber(resultSet.getString("PhNmbr"));
 				vo.setMail(resultSet.getString("MailAdd"));
 				vo.setProjectName(resultSet.getString("PrjName"));
+				vo.setQuadrant(resultSet.getString("Quadrant"));
+				vo.setPicPath(resultSet.getString("PicPath"));
 
 				listGlobers.add(vo);
 				vo = null;
@@ -122,7 +131,8 @@ public class GloberDao {
 	public GloberVO getGloberByGloberID(String globerId) {
 
 		String sql = "SELECT GLO.GlbId, GLO.SourceId, GLO.FirstName, GLO.SecondNAme," + 
-				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName " +
+				   "GLO.MidleName, GLO.LastName, GLO.PhNmbr, GLO.MailAdd, PRO.PrjName, " +
+				   "GLO.PicPath, GLO.Quadrant " +
 				   "FROM findglbr.catglobers GLO, findglbr.tblprj PRO, findglbr.tblprjlead LEAD " +
 				   "where LEAD.GlbId = GLO.GlbId " +
 				   "and PRO.ProjectId = LEAD.ProjectId " +
@@ -145,6 +155,8 @@ public class GloberDao {
 				vo.setPhoneNumber(resultSet.getString("PhNmbr"));
 				vo.setMail(resultSet.getString("MailAdd"));
 				vo.setProjectName(resultSet.getString("PrjName"));
+				vo.setQuadrant(resultSet.getString("Quadrant"));
+				vo.setPicPath(resultSet.getString("PicPath"));
 				
 				glober = vo;
 			}

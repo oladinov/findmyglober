@@ -10,7 +10,21 @@ public class GloberVO {
 	private String phoneNumber;
 	private String mail;
 	private String projectName;
+	private String quadrant;
+	private String picPath;
 	
+	public String getQuadrant() {
+		return quadrant;
+	}
+	public void setQuadrant(String quadrant) {
+		this.quadrant = quadrant;
+	}
+	public String getPicPath() {
+		return picPath;
+	}
+	public void setPicPath(String picPath) {
+		this.picPath = picPath;
+	}
 	
 	public Integer getGloberId() {
 		return globerId;
@@ -63,4 +77,5 @@ public class GloberVO {
 		this.projectName = projectName;
 	}
 }
+
 
