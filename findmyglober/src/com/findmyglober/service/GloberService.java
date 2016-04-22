@@ -1,6 +1,5 @@
 package com.findmyglober.service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.GET;
@@ -12,7 +11,10 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import org.json.JSONException;
-import org.json.JSONObject;
+
+import com.findmyglober.dao.GloberDao;
+import com.findmyglober.vo.GloberVO;
+import com.google.gson.Gson;
 
 /**
  *
@@ -32,30 +34,18 @@ import org.json.JSONObject;
  */
 @Path("/glober")
 public class GloberService {
+	
+	GloberDao globerDao;
 
 	@Path("/getByName/{name}")
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getByName(@PathParam("name") String globerName) throws JSONException {
-
-		List<JSONObject> listResponse = new ArrayList<JSONObject>();
+	public Response getByName(@PathParam("name") String globerName) throws JSONException {		
+		globerDao = new GloberDao();
+		Gson gson = new Gson();
 		
-		JSONObject jsonObject1 = new JSONObject();
-		jsonObject1.put("name", globerName);
-		jsonObject1.put("email", "emailDummy1");
-		jsonObject1.put("project", "projectDummy1");
-		jsonObject1.put("site", "siteDummy1");
-
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("name", globerName);
-		jsonObject2.put("email", "emailDummy2");
-		jsonObject2.put("project", "projectDummy2");
-		jsonObject2.put("site", "siteDummy2");
-
-		listResponse.add(jsonObject1);
-		listResponse.add(jsonObject2);
-
-		return Response.status(Status.OK).entity(listResponse.toString()).build();
+		List<GloberVO> listGlobers = globerDao.getGloberByName(globerName);		
+		return Response.status(Status.OK).entity(gson.toJson(listGlobers)).build();
 	}
 	
 	@Path("/getByEmail/{email}")
@@ -63,24 +53,11 @@ public class GloberService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getByEmail(@PathParam("email") String globerEmail) throws JSONException {
 
-		List<JSONObject> listResponse = new ArrayList<JSONObject>();
+		globerDao = new GloberDao();
+		Gson gson = new Gson();
 		
-		JSONObject jsonObject1 = new JSONObject();
-		jsonObject1.put("name", "nameDummy1");
-		jsonObject1.put("email", globerEmail);
-		jsonObject1.put("project", "projectDummy1");
-		jsonObject1.put("site", "siteDummy1");
-
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("name", "nameDummy2");
-		jsonObject2.put("email", globerEmail);
-		jsonObject2.put("project", "projectDummy2");
-		jsonObject2.put("site", "siteDummy2");
-
-		listResponse.add(jsonObject1);
-		listResponse.add(jsonObject2);
-
-		return Response.status(Status.OK).entity(listResponse.toString()).build();
+		List<GloberVO> listGlobers = globerDao.getGloberByEmail(globerEmail);		
+		return Response.status(Status.OK).entity(gson.toJson(listGlobers)).build();
 	}
 	
 	@Path("/getByProject/{project}")
@@ -88,23 +65,10 @@ public class GloberService {
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getByProject(@PathParam("project") String project) throws JSONException {
 
-		List<JSONObject> listResponse = new ArrayList<JSONObject>();
+		globerDao = new GloberDao();
+		Gson gson = new Gson();
 		
-		JSONObject jsonObject1 = new JSONObject();
-		jsonObject1.put("name", "nameDummy1");
-		jsonObject1.put("email", "emailDummy1");
-		jsonObject1.put("project", project);
-		jsonObject1.put("site", "siteDummy1");
-
-		JSONObject jsonObject2 = new JSONObject();
-		jsonObject2.put("name", "nameDummy2");
-		jsonObject2.put("email", "emailDummy2");
-		jsonObject2.put("project", project);
-		jsonObject2.put("site", "siteDummy2");
-
-		listResponse.add(jsonObject1);
-		listResponse.add(jsonObject2);
-
-		return Response.status(Status.OK).entity(listResponse.toString()).build();
+		List<GloberVO> listGlobers = globerDao.getGloberByProject(project);		
+		return Response.status(Status.OK).entity(gson.toJson(listGlobers)).build();
 	}
 }
