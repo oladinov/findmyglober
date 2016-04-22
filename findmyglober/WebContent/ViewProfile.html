@@ -11,6 +11,41 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.12.0.min.js"></script>
+<script src="js/getUrlQueryParams.js"></script>
+<style type="text/css">
+/* Start by setting display:none to make this hidden.
+   Then we position it in relation to the viewport window
+   with position:fixed. Width, height, top and left speak
+   for themselves. Background we set to 80% white with
+   our animation centered, and no-repeating */
+.modal {
+    display:    none;
+    position:   fixed;
+    z-index:    1000;
+    top:        0;
+    left:       0;
+    height:     100%;
+    width:      100%;
+    background: rgba( 255, 255, 255, .8 ) 
+                url('http://i.stack.imgur.com/FhHRx.gif') 
+                50% 50% 
+                no-repeat;
+}
+
+/* When the body has the loading class, we turn
+   the scrollbar off with overflow:hidden */
+body.loading {
+    overflow: hidden;   
+}
+
+/* Anytime the body has the loading class, our
+   modal element will be visible */
+body.loading .modal {
+    display: block;
+}
+</style>
 </head>
 <body>
 
@@ -26,7 +61,7 @@
     <!-- edit form column -->
     <div class="col-md-8 col-sm-6 col-xs-12 personal-info">
       <div class="alert alert-info alert-dismissable">
-        <a class="panel-close close" data-dismiss="alert">�</a> 
+        <a class="panel-close close" data-dismiss="alert">×</a> 
         <i class="fa fa-coffee"></i>
         This is an <strong>.alert</strong>. Use this to show important messages to the user.
       </div>
@@ -35,55 +70,31 @@
         <div class="form-group">
           <label class="col-lg-3 control-label">First name:</label>
           <div class="col-lg-8">
-            <span>Oscar</span>
+            <span id="fname"></span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Last name:</label>
           <div class="col-lg-8">
-            <span>Ladino</span>
+            <span id="lname"></span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Project:</label>
           <div class="col-lg-8">
-            <span>Oportum</span>
+            <span id="project"></span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-lg-3 control-label">Email:</label>
           <div class="col-lg-8">
-            <span>oscar.ladino@globant.com</span>
+            <span id="mail"></span>
           </div>
         </div>
         <div class="form-group">
           <label class="col-md-3 control-label">Phone bridge:</label>
           <div class="col-md-8">
-            <span>21115</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Leader:</label>
-          <div class="col-md-8">
-            <span>Fernando Curra</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Position:</label>
-          <div class="col-md-8">
-            <span>Java Developer</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Seniority:</label>
-          <div class="col-md-8">
-            <span>SSR Adv.</span>
-          </div>
-        </div>
-        <div class="form-group">
-          <label class="col-md-3 control-label">Project Manager:</label>
-          <div class="col-md-8">
-            <span>Fernando Curra</span>
+            <span id="phone"></span>
           </div>
         </div>
         <div class="form-group">
@@ -104,8 +115,37 @@
     </div>
   </div>
 </div>
+<div class="modal"><!-- Place at bottom of page --></div>
+<script>
 
+$body = $("body");
 
+$(document).on({
+    ajaxStart: function() { $body.addClass("loading");    },
+     ajaxStop: function() { $body.removeClass("loading"); }    
+});
+
+var globerID = getUrlParameter("glober");
+
+if(!$.isNumeric(globerID )) {
+	
+	alert("No se ha proporcionado un Glober ID ಠ_ಠ");
+} else {
+	$.ajax({ 
+	    type: "GET",
+	    dataType: "json",
+	    url: "/findmyglober/glober/getById/" + globerID,
+	    success: function(data){
+	       
+	       $('#fname').text(data.firstName + ' ' + data.secondName);
+	       $('#lname').text(data.middleName + ' ' + data.lastName);
+	       $('#phone').text(data.phoneNumber);
+	       $('#mail').text(data.mail);
+	       $('#project').text(data.projectName);
+	    }
+	});
+}
+</script>
 
 </body>
 </html>
