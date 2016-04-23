@@ -134,7 +134,7 @@ if(!$.isNumeric(globerID )) {
 	$.ajax({ 
 	    type: "GET",
 	    dataType: "json",
-	    url: "/findmyglober/glober/getByGloberId/" + globerID,
+	    url: "/findmyglober/my/glober/getByGloberId/" + globerID,
 	    success: function(data){
 	       
 	       $('#fname').text(data.firstName + ' ' + data.secondName);

@@ -21,16 +21,16 @@ import com.google.gson.Gson;
  * Service calls
  * 
  * getByName
- * /findmyglober/glober/getByName/{name}
+ * /findmyglober/my/glober/getByName/{name}
  * 
  * getByEmail
- * /findmyglober/glober/getByEmail/{email}
+ * /findmyglober/my/glober/getByEmail/{email}
  * 
  * getByProject
- * /findmyglober/glober/getByProject/{project}
+ * /findmyglober/my/glober/getByProject/{project}
  * 
  *  * getByGloberId
- * /findmyglober/glober/getByGloberId/{globerId}
+ * /findmyglober/my/glober/getByGloberId/{globerId}
  * 
  * @author Gerardo Solorzano
  *
